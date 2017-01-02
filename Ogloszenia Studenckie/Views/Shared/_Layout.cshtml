@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-fixed-top navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,19 +17,126 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Ogłoszenia studenckie", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+                <div style="display:inline-block; padding:8px">
+                    @Html.ActionLink("Dodaj Swoje ogłoszenie", "Contact", "Home",null, new { @class = "btn btn-danger" })
+                </div>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
+
+    
     <div class="container body-content">
+        <div class="page-header" style="margin-top:0px;">
+            <form class="form-inline well well-sm" style="margin-bottom:-5px;">
+                <div class="form-group col-lg-8" style="padding:0px;">
+                    <input type="text" class="form-control" id="Search" placeholder="Szukaj">
+                </div>
+                <div class="form-group col-lg-3" style="padding:0px; text-align: center;">
+                    <select class="form-control " id="sel1">
+                        <option>Wszystkie kategorie</option>
+                        <option>Kategoria 1</option>
+                        <option>Kategoria 2</option>
+                        <option>Kategoria 3</option>
+                        <option>Kategoria 4</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default col-lg-1" style="padding-left:0px;">Szukaj</button>
+            </form>
+            <div class="jumbotron panel-group" id="acc" style="margin:0px;padding-bottom:0px;padding-top:0px; text-align: center;">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#collapse1" class="btn">Studia</a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li>Korepetycje</li>
+                                            <li>Projekty</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"> 
+                        <div class="dropdown">
+                              <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Kwaterunek
+                              <span class="caret"></span></button>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Akademiki</a></li>
+                                <li><a href="#">Pokoje do wynajęcia</a></li>
+                                <li><a href="#">Inne?</a></li>
+                              </ul>
+                        </div> 
+                    </div>
+                    <div class="panel-heading col-lg-2"><a data-toggle="collapse" data-parent="#acc" href="#coll1" class="btn btn-danger btn-lg">Social</a></div>
+                    <div class="panel-heading col-lg-2"><a data-toggle="collapse" data-parent="#acc" href="#coll2">Wyposażenie</a></div>
+                    <div class="panel-heading col-lg-2"><a data-toggle="collapse" data-parent="#acc" href="#coll3">Kategoria</a></div>
+                    <div class="panel-heading col-lg-2"><a data-toggle="collapse" data-parent="#acc" href="#coll4">Inne</a></div>
+                </div>
+                <div class="panel">
+                    <div id="coll1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4 class="panel-heading">Social</h4>
+                            Opis kategorii, podkategorie takie tam
+                            <ul>
+                                <li>Imprezy</li>
+                                <li>Koła studenckie</li>
+                                <li>Wyjazdy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div id="coll2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4 class="panel-heading">Wyposażenie</h4>
+                            Opis tej kategorii i tym podobne
+                            <ul>
+                                <li>Meble</li>
+                                <li>Komputery</li>
+                                <li>Telefony</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div id="coll3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4 class="panel-heading">Kategoria</h4>
+                            Nie wiem jaka by tu mogła być kategoria, ale najbardziej by mi pasowało jakby było 6 kategorii łacznie
+                            <ul>
+                                <li>podkategoria</li>
+                                <li>podkategoria</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div id="coll4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4 class="panel-heading">Inne</h4>
+                            Inne podkategorie które nie pasują do innych kategorii
+                            <ul>
+                                <li>Oddam za darmo</li>
+                                <li>Wymienie</li>
+                                <li>Zwierzęta</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         @RenderBody()
         <hr />
         <footer>
