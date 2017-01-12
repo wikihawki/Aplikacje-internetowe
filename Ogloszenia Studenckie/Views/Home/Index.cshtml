@@ -2,26 +2,195 @@
     ViewBag.Title = "Home Page";
 }
 
+<style>
+.news{
+  padding:40px;
+  display:inline-block;
+}
 
-<h2>Najnowsze ogłoszenia</h2>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+.achiv {
+    width: 178px;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    background:white;
+    margin:14px;
+    border-radius: 88px 88px 50% 50%;
+    text-align:center;
+    border:2px solid #e3e3e3;
+    display:inline-block;
+}
+    .achiv:hover {
+    background:#e3e3e3;
+    text-decoration:none;
+    }
+.image-rounder {
+    width: 170px;
+    height: 170px;
+    position: relative;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border:2px solid #e3e3e3;
+    margin:2px;
+}
+.rounded-image {
+    display: inline;
+    margin: 0 auto;
+    height: 100%;
+   position: absolute;
+  left: 50%;
+  top: 50%;
+   -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.name{
+
+  padding:10px;
+  padding-top:0;
+}
+.price{
+  background:#e3e3e3;
+  padding-bottom:20px;
+
+}
+</style>
+<div class="panel-title text-center"><h2>Najnowsze ogłoszenia</h2></div>
+<div>
+    <div class="news well">
+        <a href="@Url.Action("Index","Search")" class="achiv">
+            <div class="image-rounder">
+                <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                Super rover<br>
+                jest super
+            </div>
+            <div class="price">
+                <b>1000zł</b>
+            </div>
+        </a>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                Super rover<br>
+                jest super
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                Super rover<br>
+                jest super
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                Super rover<br>
+                jest super
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                Super rover<br>
+                jest super
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
+        <div class="achiv">
+            <div class="image-rounder">
+                <img src="http://img4.sprzedajemy.pl/540x405_encyklopedia-pwn-766244.jpg" class="rounded-image" />
+            </div>
+            <div class="name">
+                encyklopedia wiedzy o informatyce,
+                czarnej magii i pieczeniu ciast
+            </div>
+            <div class="price">
+                1000zł
+            </div>
+        </div>
     </div>
 </div>
