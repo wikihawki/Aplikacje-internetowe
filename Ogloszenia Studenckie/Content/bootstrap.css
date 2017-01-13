@@ -233,7 +233,7 @@ table {
   }
   a,
   a:visited {
-    text-decoration: underline;
+    text-decoration: none;
   }
   a[href]:after {
     content: " (" attr(href) ")";
@@ -335,14 +335,14 @@ textarea {
 }
 
 a {
-  color: #428bca;
+  color: #999999;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #2a6496;
-  text-decoration: underline;
+  color: #000000;
+  text-decoration: none;
 }
 
 a:focus {
@@ -4693,8 +4693,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
   z-index: 2;
   color: #ffffff;
   cursor: default;
-  background-color: #428bca;
-  border-color: #428bca;
+  background-color: #999999;
+  border-color: #555555;
 }
 
 .pagination > .disabled > span,
@@ -5392,6 +5392,7 @@ a.list-group-item:focus {
   border-bottom: 1px solid transparent;
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
+  background:#e3e3e3;
 }
 
 .panel-title {
@@ -5448,6 +5449,10 @@ a.list-group-item:focus {
   border: #555555 1px solid;
 }
 
+    .panel-default > .panel-footer {
+    background:#e3e3e3;
+    }
+
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #dddddd;
 }
@@ -5455,6 +5460,10 @@ a.list-group-item:focus {
 .panel-default > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #dddddd;
 }
+
+    .panel-default > .panel-heading > a {
+        color:#ffffff;
+    }
 
 .panel-primary {
   border-color: #428bca;

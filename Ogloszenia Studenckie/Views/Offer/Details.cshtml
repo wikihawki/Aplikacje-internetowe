@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Nazwa oferty";
+}
+@{string nazwa = "Super rover";
+    string opis = "Rower taki zajebisty że aż kutasy lecą z nieba, a dalej jest tekst piosenki żeby pokazać co się dzieje jak jest za dużo tekstu Wciąż ubierasz się na szaro<br> Szarą szminką zdobisz ciało Kocham cię pod szarym niebem Oddychamy szarym tlenem<br> Szary koniec i początek<br> Szary wtorek szary piątek<br> Szare myśli nad głowami<br> Szary spokój między nami";
+    int cena = 100000;
+    string miasto = "Warszawa";
+    string uczel = "Wojskowa Akademia Techniczna";
+    string obraz = "http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg";
+}@*zamiast tego będzie model *@
+
+
+
+<style>
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    width:100%;
+    height:auto;
+}
+
+
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.close {
+    position: absolute;
+    top: 55px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+    .catego {
+    color:#e3e3e3;
+    }
+}
+</style>
+<h2 class="text-center">@nazwa</h2>
+
+
+<div class="well">
+    <div class="row">
+        <div class="col-md-7">
+            <img id="myImg" src="@obraz" alt="Super Rover">
+            <div id="myModal" class="modal">
+                <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                <img class="modal-content" id="img01">
+
+                <div id="caption"></div>
+            </div>
+        </div>
+                    
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>@cena zł</h4>
+                </div>
+                <div class="panel-body">
+                    Numer kontaktowy: 0 700 880<br>
+                    E-mail kontaktowy: adres@domena.pl<br /><br />
+                    Dodano: 25.02.2054
+                </div>
+                <div class="panel-footer">
+                @uczel - @miasto
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>@Html.ActionLink("Wszystkie", "Index", "Search", null, new { @class = "catego" }) > [Kategoria] > [Podkategoria] > [Fraza]</h4>
+        </div>
+        <div class="panel-body">
+            @opis
+        </div>
+
+    </div>
+</div>
+
+
+            <script>
+                // Get the modal
+                var modal = document.getElementById('myModal');
+
+                // Get the image and insert it inside the modal - use its "alt" text as a caption
+                var img = document.getElementById('myImg');
+                var modalImg = document.getElementById("img01");
+                var captionText = document.getElementById("caption");
+                img.onclick = function () {
+                    modal.style.display = "block";
+                    modalImg.src = this.src;
+                    captionText.innerHTML = this.alt;
+                }
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+            </script>

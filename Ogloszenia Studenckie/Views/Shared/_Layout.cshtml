@@ -34,16 +34,19 @@
     
     <div class="container body-content">
         <div class="page-header" style="margin-top:-5px; ">
-            <form class="form-inline well well-sm" style="margin-bottom:-5px;">
+            
+            @using (Html.BeginForm("Index", "Search", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline well well-sm", role = "form" }))
+            {
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Szukaj">
                     <div class="input-group-addon" style="padding:0;border:0; width:160px">
                         <select class="form-control " id="sel1">
                             <option>Wszystkie kategorie</option>
-                            <option>Kategoria 1</option>
-                            <option>Kategoria 2</option>
-                            <option>Kategoria 3</option>
-                            <option>Kategoria 4</option>
+                            <option>Social</option>
+                            <option>Studia</option>
+                            <option>Kwaterunek</option>
+                            <option>Sprzedam</option>
+                            <option>Inne</option>
                         </select>
                     </div>
                         <div class="input-group-btn">
@@ -52,7 +55,8 @@
                             </button>
                         </div>
                     </div>
-              </form>
+              }
+             
             <div class="well panel-group" id="acc" style="margin:0px;padding-bottom:0px;padding-top:0px; text-align: center;">
                 <div class="row">
                     <div class="col-sm-2">
