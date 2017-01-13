@@ -54,7 +54,10 @@
    display:block;
    margin-top:5px;
    font-weight:bold;
-
+   background:#999999;
+   color:#ffffff;
+   margin-left:60px;
+   margin-right:60px;
 }
 .offer-contnet{
   height:100%;
@@ -73,8 +76,10 @@
     color:#999999;
     }
 
-    #schools-links {
+    #schools-links ,
+    #cities-links{
     max-height:1008px;
+    overflow:auto;
     }
 }
 </style>
@@ -108,36 +113,8 @@
             </div>
             <div class="panel panel-default list-group">
                 <div class="panel-heading panel-default"><h4>Lokalizacja</h4></div><!-- Jeśli -->
-                
-                    <select id="region-select" class="form-control" onchange="filterList()" onload="filterList()">
-                        <option value="0" selected>Wszystkie województwa</option>
-                        <option value=1>Mazowieckie</option>
-                        <option value=2>Śląsk</option>
-                        <option value=3>Pomorze</option>
-                        <option value=4>Małopolska</option>
-                        <option value=5>Wielkopolska</option>
-                        <option value=6>Lubelskie</option>
-                    </select>
 
-                    <select id="cities-select" class="form-control" onchange="filterList()">
-                        <option value="0" selected>Wszystkie miasta</option>
-                        <option value="101">Warszawa</option>
-                        <option value="102">Płock</option>
-                        <option value="103">Mińsk Mazowiecki</option>
-                        <option value="401">Kraków</option>
-                        <option value="402">Nowy Sącz</option>
-                        <option value="403">Zakopane</option>
-                        <option value="301">Gdańsk</option>
-                        <option value="302">Gdynia</option>
-                        <option value="201">Katowice</option>
-                        <option value="501">Poznań</option>
-                        <option value="601">Lublin</option>
-                    </select>
-
-                    <div class="form-group">
-                        <center><button type="submit" class="btn btn-default">Szukaj</button></center>
-                    </div>
-                <input type="text" class="form-control" id="school-name" onkeyup="filterList()" placeholder="Nazwa Uczelni" title="Wpisz nazwę lub skrót nazwy Uczelni">
+                    <input type="text" class="form-control" id="school-name" onkeyup="filterList()" placeholder="Uczelnia lub miasto" title="Wpisz nazwę uczelni lub miasta">
                     <center class="panel-group">
                         <div class="panel panel-default">
                             <a data-toggle="collapse" href="#schools-links">
@@ -148,44 +125,49 @@
                                 </div>
                             </a>
                             <div id="schools-links" class="panel-collapse collapse">
-                                <ul class="list-group">
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                    <a href="#" title="Wojskowa Akademia Techniczna"><li value=10101 title="Wojskowa Akademia Techniczna" class="list-group-item">WAT</li></a>
-                                    <a href="#" title="Uniwersytet Warszawski"><li value=10102 title="Uniwersytet Warszawski" class="list-group-item">UW</li></a>
-                                    <a href="#"><li value=10103 class="list-group-item">PW</li></a>
-                                    <a href="#"><li value=40101 class="list-group-item">UJ</li></a>
-                                    <a href="#"><li value=10104 class="list-group-item">AWF</li></a>
-                                    <a href="#"><li value=30101 class="list-group-item">AMW</li></a>
-                                </ul>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">Wojskowa Akademia Techniczna</a>
+                                    <a href="#" class="list-group-item">Uniwersytet Warszawski</a>
+                                    <a href="#" class="list-group-item">Politechnika Warszawska</a>
+                                    <a href="#" class="list-group-item">Politechnika Poznańska</a>
+                                    <a href="#" class="list-group-item">Uniwersytet Jaggieloński</a>
+                                    <a href="#" class="list-group-item">Warszawski Uniwersytet Medyczny</a>
+                                    <a href="#" class="list-group-item">Szkoła Główna Handlowa</a>
+                                    <a href="#" class="list-group-item">Szkoła Główna Gospodarstwa Wiejskiego</a>
+                                    <a href="#" class="list-group-item">Polsko-Japońska Akademia Technik Komputerowych</a>
+                                    <a href="#" class="list-group-item">Akademia Marynarki Wojennej</a>
+                                    @for (var i = 1; i < 8; i++)
+                                    {
+                                        <a href="#" class="list-group-item @(i == 3 ? "active" : "")">Przykładowa uczelnia nr @i</a> <!--  -->
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+                    <center class="panel-group">
+                        <div class="panel panel-default">
+                            <a data-toggle="collapse" href="#cities-links">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        Wybierz Miasto
+                                    </h4>
+                                </div>
+                            </a>
+                            <div id="cities-links" class="panel-collapse collapse">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">Wszystkie miasta</a>
+                                    <a href="#" class="list-group-item">Warszawa</a>
+                                    <a href="#" class="list-group-item">Płock</a>
+                                    <a href="#" class="list-group-item">Mińsk Mazowiecki</a>
+                                    <a href="#" class="list-group-item">Kraków</a>
+                                    <a href="#" class="list-group-item">Nowy Sącz</a>
+                                    <a href="#" class="list-group-item">Zakopane</a>
+                                    <a href="#" class="list-group-item">Gdańsk</a>
+                                    <a href="#" class="list-group-item">Gdynia</a>
+                                    <a href="#" class="list-group-item">Katowice</a>
+                                    <a href="#" class="list-group-item">Poznań</a>
+                                    <a href="#" class="list-group-item">Lublin</a>
+                                </div>
                             </div>
                         </div>
                     </center>
@@ -198,7 +180,7 @@
     <div class="col-sm-10" >
     @for (var i = 1; i < 15; i++)
     {
-        <div class="offer">
+        <a href="@Url.Action("Details","Offer",new {ID=1 })" class="offer">
             <div class="image-rounder-offer">
                 <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
             </div>
@@ -211,7 +193,7 @@
                         jest super @(i > 5 ? "długa nazwa, tak żeby złamała linie, bla bla bala ala blaaa i jeszcze troche" : "")
                     
                 </div>
-                <h5>
+                <h5 style="color:black">
                     Warszawa - Wojskowa Akademia Techniczna
                 </h5>
                 <div class="offer-disc">
@@ -221,7 +203,7 @@
             <div>
 
             </div>
-        </div>
+        </a>
     }
 
         <center>
@@ -242,38 +224,28 @@
         </center>
     </div>
 </div>
-
+<!--for (i = 0; i < citiesList.length; i++) {
+            city = citiesList[i].innerHTML.toUpperCase();;
+            if (city.indexOf(filterSch) > -1) citiesList[i].style.display = "";
+            else citiesList[i].style.display = "none";
+        }-->
 <script>
     function filterList() {
-        var regions, filterReg, cities, filterCit, citiesList, city, i, schools, schoolsList, school, abbre, name, id, filterSch;
+        var regions, filterReg, cities, filterCit, citiesList, city, i, schools, schoolsList, school, abbre, schoolname, id, filterSch;
 
-        regions = document.getElementById("region-select");
-        filterReg = regions.value;
-        cities = document.getElementById("cities-select");
-        filterCit = cities.value;
-        citiesList = cities.getElementsByTagName("option");
-        for (i = 0; i < citiesList.length; i++) {
-            city = citiesList[i].value;
-            if ((city - filterReg * 100 < 100 && city - filterReg * 100 > 0) || filterReg == 0) {
-                citiesList[i].style.display = "";
-            } else {
-                citiesList[i].style.display = "none";
-            }
-        }
         schoolsList = document.getElementById("schools-links").getElementsByTagName("a");
         schools = document.getElementById("school-name");
         filterSch = schools.value.toUpperCase();
+        citiesList = document.getElementById("cities-links").getElementsByTagName("a");
         for (i = 0; i < schoolsList.length; i++) {
-            school = schoolsList[i].getElementsByTagName("li")[0];
-            abbre = school.innerHTML.toUpperCase();
-            name = school.title.toUpperCase();
-            id = school.value;
-            if (
-            (name.indexOf(filterSch) > -1 || abbre.indexOf(filterSch) > -1) &&
-            ((id - filterReg * 10000 < 10000 && id - filterReg * 10000 > 0) || filterReg == 0) &&
-            ((id - filterCit * 100 < 100 && id - filterCit * 100 > 0) || filterCit == 0)
-            ) schoolsList[i].style.display = "";
+            school = schoolsList[i].innerHTML.toUpperCase();
+            if (school.indexOf(filterSch) > -1) schoolsList[i].style.display = "";
             else schoolsList[i].style.display = "none";
+        }
+        for (i = 0; i < citiesList.length; i++) {
+            city = citiesList[i].innerHTML.toUpperCase();;
+            if (city.indexOf(filterSch) > -1) citiesList[i].style.display = "";
+            else citiesList[i].style.display = "none";
         }
     }
 </script>

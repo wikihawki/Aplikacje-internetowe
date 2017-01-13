@@ -1,24 +1,25 @@
 ﻿
 @{
-    ViewBag.Title = "Nazwa oferty";
-}
-@{string nazwa = "Super rover";
+
+    string nazwa = "Super rover";
     string opis = "Rower taki zajebisty że aż kutasy lecą z nieba, a dalej jest tekst piosenki żeby pokazać co się dzieje jak jest za dużo tekstu Wciąż ubierasz się na szaro<br> Szarą szminką zdobisz ciało Kocham cię pod szarym niebem Oddychamy szarym tlenem<br> Szary koniec i początek<br> Szary wtorek szary piątek<br> Szare myśli nad głowami<br> Szary spokój między nami";
     int cena = 100000;
     string miasto = "Warszawa";
     string uczel = "Wojskowa Akademia Techniczna";
-    string obraz = "http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg";
+    string[] obrazy = new string[4]
+    {
+        "http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg",
+        "https://roweroweporady.pl/wp-content/uploads/2014/11/noski-do-pedalow.jpg",
+        "http://images.elektrobike-online.com/sixcms/media.php/6/UB_Smart_eBike_797670_1464205_7216_5412_10C1062_08_seitl.jpg",
+        "http://www.zercustoms.com/news/images/Smart/smart-ebike-5.jpg"
+    };
+    ViewBag.Title = nazwa;
 }@*zamiast tego będzie model *@
 
 
 
 <style>
-#myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    width:100%;
-    height:auto;
-}
+
 
 
 .modal {
@@ -38,20 +39,10 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: auto;
+    max-width: 100%;
 }
 
-#caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-}
 
 .close {
     position: absolute;
@@ -69,24 +60,26 @@
     text-decoration: none;
     cursor: pointer;
 }
-    .catego {
+    .alt-link {
     color:#e3e3e3;
+    }
+    .modal-link {
+    cursor:pointer;
     }
 }
 </style>
 <h2 class="text-center">@nazwa</h2>
-
+<div id="myModal" class="modal">
+    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
 
 <div class="well">
     <div class="row">
         <div class="col-md-7">
-            <img id="myImg" src="@obraz" alt="Super Rover">
-            <div id="myModal" class="modal">
-                <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                <img class="modal-content" id="img01">
-
-                <div id="caption"></div>
-            </div>
+            @if (obrazy.Length > 0)
+            {<img id="myImg" src="@obrazy[0]" class="modal-link img-rounded img-responsive" onclick="showModal(this.src)">}
+            
         </div>
                     
         <div class="col-md-5">
@@ -108,35 +101,29 @@
     <hr>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h4>@Html.ActionLink("Wszystkie", "Index", "Search", null, new { @class = "catego" }) > [Kategoria] > [Podkategoria] > [Fraza]</h4>
+            <h4>@Html.ActionLink("Wszystkie", "Index", "Search", null, new { @class = "alt-link" }) > [Kategoria] > [Podkategoria] > [Fraza]</h4>
         </div>
         <div class="panel-body">
-            @opis
+            @Html.Raw(opis);
         </div>
+        <center class="panel-footer">
+            @if (obrazy.Length > 0) {<h4>Galeria</h4> }
+            @for (int i = 0; i < obrazy.Length; i++)
+            {
+                <img id="myImg" src="@obrazy[i]" class="modal-link img-rounded" onclick="showModal(this.src)" style="max-width:30%; display:inline-block">
+            }
+        </center>
 
     </div>
 </div>
 
 
             <script>
-                // Get the modal
-                var modal = document.getElementById('myModal');
+                function showModal(image) {
+                var modal;
+                modal = document.getElementById('myModal');
+                modal.style.display = "block";
+                document.getElementById('img01').src = image;
+            }
 
-                // Get the image and insert it inside the modal - use its "alt" text as a caption
-                var img = document.getElementById('myImg');
-                var modalImg = document.getElementById("img01");
-                var captionText = document.getElementById("caption");
-                img.onclick = function () {
-                    modal.style.display = "block";
-                    modalImg.src = this.src;
-                    captionText.innerHTML = this.alt;
-                }
-
-                // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close")[0];
-
-                // When the user clicks on <span> (x), close the modal
-                span.onclick = function () {
-                    modal.style.display = "none";
-                }
             </script>
