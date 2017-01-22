@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="ID_Kategoria" />
+          </Key>
+          <Property Name="ID_Kategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+          <Property Name="NadKategoria" Type="int" />
+        </EntityType>
+        <EntityType Name="Konto">
+          <Key>
+            <PropertyRef Name="ID_Konto" />
+          </Key>
+          <Property Name="ID_Konto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="E_Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Haslo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rola" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Miasto">
+          <Key>
+            <PropertyRef Name="ID_Miasto" />
+          </Key>
+          <Property Name="ID_Miasto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obserwacja">
+          <Key>
+            <PropertyRef Name="ID_Obserwacja" />
+          </Key>
+          <Property Name="ID_Obserwacja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Konto" Type="int" Nullable="false" />
+          <Property Name="ID_Ogloszenie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ogloszenie">
+          <Key>
+            <PropertyRef Name="ID_Ogloszenie" />
+          </Key>
+          <Property Name="ID_Ogloszenie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tytul" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cena" Type="numeric" Precision="10" Scale="2" />
+          <Property Name="Opis" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Data_Zamkniecia" Type="datetime" />
+          <Property Name="Data_Zamieszczenia" Type="datetime" Nullable="false" />
+          <Property Name="ID_Kategoria" Type="int" Nullable="false" />
+          <Property Name="ID_Konto" Type="int" Nullable="false" />
+          <Property Name="ID_Miasto" Type="int" Nullable="false" />
+          <Property Name="ID_Uczelnia" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Uczelnia">
+          <Key>
+            <PropertyRef Name="ID_Uczelnia" />
+          </Key>
+          <Property Name="ID_Uczelnia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Kategoria_Kategoria">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="0..1" />
+          <End Role="Kategoria1" Type="Self.Kategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="ID_Kategoria" />
+            </Principal>
+            <Dependent Role="Kategoria1">
+              <PropertyRef Name="NadKategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obserwacja_Konto">
+          <End Role="Konto" Type="Self.Konto" Multiplicity="1" />
+          <End Role="Obserwacja" Type="Self.Obserwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID_Konto" />
+            </Principal>
+            <Dependent Role="Obserwacja">
+              <PropertyRef Name="ID_Konto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obserwacja_Ogloszenie">
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="1" />
+          <End Role="Obserwacja" Type="Self.Obserwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogloszenie">
+              <PropertyRef Name="ID_Ogloszenie" />
+            </Principal>
+            <Dependent Role="Obserwacja">
+              <PropertyRef Name="ID_Ogloszenie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Kategoria">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="ID_Kategoria" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Kategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Konto">
+          <End Role="Konto" Type="Self.Konto" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID_Konto" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Konto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Miasto">
+          <End Role="Miasto" Type="Self.Miasto" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Miasto">
+              <PropertyRef Name="ID_Miasto" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Miasto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Uczelnia">
+          <End Role="Uczelnia" Type="Self.Uczelnia" Multiplicity="0..1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uczelnia">
+              <PropertyRef Name="ID_Uczelnia" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Uczelnia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Kategoria" EntityType="Self.Kategoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Konto" EntityType="Self.Konto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Miasto" EntityType="Self.Miasto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obserwacja" EntityType="Self.Obserwacja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogloszenie" EntityType="Self.Ogloszenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uczelnia" EntityType="Self.Uczelnia" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Kategoria_Kategoria" Association="Self.FK_Kategoria_Kategoria">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Kategoria1" EntitySet="Kategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obserwacja_Konto" Association="Self.FK_Obserwacja_Konto">
+            <End Role="Konto" EntitySet="Konto" />
+            <End Role="Obserwacja" EntitySet="Obserwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obserwacja_Ogloszenie" Association="Self.FK_Obserwacja_Ogloszenie">
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+            <End Role="Obserwacja" EntitySet="Obserwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Kategoria" Association="Self.FK_Ogloszenie_Kategoria">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Konto" Association="Self.FK_Ogloszenie_Konto">
+            <End Role="Konto" EntitySet="Konto" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Miasto" Association="Self.FK_Ogloszenie_Miasto">
+            <End Role="Miasto" EntitySet="Miasto" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Uczelnia" Association="Self.FK_Ogloszenie_Uczelnia">
+            <End Role="Uczelnia" EntitySet="Uczelnia" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="ID_Kategoria" />
+          </Key>
+          <Property Name="ID_Kategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NadKategoria" Type="Int32" />
+          <NavigationProperty Name="Kategoria1" Relationship="Self.FK_Kategoria_Kategoria" FromRole="Kategoria" ToRole="Kategoria1" />
+          <NavigationProperty Name="Kategoria2" Relationship="Self.FK_Kategoria_Kategoria" FromRole="Kategoria1" ToRole="Kategoria" />
+          <NavigationProperty Name="Ogloszenie" Relationship="Self.FK_Ogloszenie_Kategoria" FromRole="Kategoria" ToRole="Ogloszenie" />
+        </EntityType>
+        <EntityType Name="Konto">
+          <Key>
+            <PropertyRef Name="ID_Konto" />
+          </Key>
+          <Property Name="ID_Konto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="E_Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Rola" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Obserwacja" Relationship="Self.FK_Obserwacja_Konto" FromRole="Konto" ToRole="Obserwacja" />
+          <NavigationProperty Name="Ogloszenie" Relationship="Self.FK_Ogloszenie_Konto" FromRole="Konto" ToRole="Ogloszenie" />
+        </EntityType>
+        <EntityType Name="Miasto">
+          <Key>
+            <PropertyRef Name="ID_Miasto" />
+          </Key>
+          <Property Name="ID_Miasto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ogloszenie" Relationship="Self.FK_Ogloszenie_Miasto" FromRole="Miasto" ToRole="Ogloszenie" />
+        </EntityType>
+        <EntityType Name="Obserwacja">
+          <Key>
+            <PropertyRef Name="ID_Obserwacja" />
+          </Key>
+          <Property Name="ID_Obserwacja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Konto" Type="Int32" Nullable="false" />
+          <Property Name="ID_Ogloszenie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Konto" Relationship="Self.FK_Obserwacja_Konto" FromRole="Obserwacja" ToRole="Konto" />
+          <NavigationProperty Name="Ogloszenie" Relationship="Self.FK_Obserwacja_Ogloszenie" FromRole="Obserwacja" ToRole="Ogloszenie" />
+        </EntityType>
+        <EntityType Name="Ogloszenie">
+          <Key>
+            <PropertyRef Name="ID_Ogloszenie" />
+          </Key>
+          <Property Name="ID_Ogloszenie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tytul" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cena" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Data_Zamkniecia" Type="DateTime" Precision="3" />
+          <Property Name="Data_Zamieszczenia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID_Kategoria" Type="Int32" Nullable="false" />
+          <Property Name="ID_Konto" Type="Int32" Nullable="false" />
+          <Property Name="ID_Miasto" Type="Int32" Nullable="false" />
+          <Property Name="ID_Uczelnia" Type="Int32" />
+          <NavigationProperty Name="Kategoria" Relationship="Self.FK_Ogloszenie_Kategoria" FromRole="Ogloszenie" ToRole="Kategoria" />
+          <NavigationProperty Name="Konto" Relationship="Self.FK_Ogloszenie_Konto" FromRole="Ogloszenie" ToRole="Konto" />
+          <NavigationProperty Name="Miasto" Relationship="Self.FK_Ogloszenie_Miasto" FromRole="Ogloszenie" ToRole="Miasto" />
+          <NavigationProperty Name="Obserwacja" Relationship="Self.FK_Obserwacja_Ogloszenie" FromRole="Ogloszenie" ToRole="Obserwacja" />
+          <NavigationProperty Name="Uczelnia" Relationship="Self.FK_Ogloszenie_Uczelnia" FromRole="Ogloszenie" ToRole="Uczelnia" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Uczelnia">
+          <Key>
+            <PropertyRef Name="ID_Uczelnia" />
+          </Key>
+          <Property Name="ID_Uczelnia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ogloszenie" Relationship="Self.FK_Ogloszenie_Uczelnia" FromRole="Uczelnia" ToRole="Ogloszenie" />
+        </EntityType>
+        <Association Name="FK_Kategoria_Kategoria">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="0..1" />
+          <End Role="Kategoria1" Type="Self.Kategoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="ID_Kategoria" />
+            </Principal>
+            <Dependent Role="Kategoria1">
+              <PropertyRef Name="NadKategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Kategoria">
+          <End Role="Kategoria" Type="Self.Kategoria" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="ID_Kategoria" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Kategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obserwacja_Konto">
+          <End Role="Konto" Type="Self.Konto" Multiplicity="1" />
+          <End Role="Obserwacja" Type="Self.Obserwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID_Konto" />
+            </Principal>
+            <Dependent Role="Obserwacja">
+              <PropertyRef Name="ID_Konto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Konto">
+          <End Role="Konto" Type="Self.Konto" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Konto">
+              <PropertyRef Name="ID_Konto" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Konto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Miasto">
+          <End Role="Miasto" Type="Self.Miasto" Multiplicity="1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Miasto">
+              <PropertyRef Name="ID_Miasto" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Miasto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Obserwacja_Ogloszenie">
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="1" />
+          <End Role="Obserwacja" Type="Self.Obserwacja" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ogloszenie">
+              <PropertyRef Name="ID_Ogloszenie" />
+            </Principal>
+            <Dependent Role="Obserwacja">
+              <PropertyRef Name="ID_Ogloszenie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogloszenie_Uczelnia">
+          <End Role="Uczelnia" Type="Self.Uczelnia" Multiplicity="0..1" />
+          <End Role="Ogloszenie" Type="Self.Ogloszenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uczelnia">
+              <PropertyRef Name="ID_Uczelnia" />
+            </Principal>
+            <Dependent Role="Ogloszenie">
+              <PropertyRef Name="ID_Uczelnia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Aplikacje_InternetoweEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Kategoria" EntityType="Self.Kategoria" />
+          <EntitySet Name="Konto" EntityType="Self.Konto" />
+          <EntitySet Name="Miasto" EntityType="Self.Miasto" />
+          <EntitySet Name="Obserwacja" EntityType="Self.Obserwacja" />
+          <EntitySet Name="Ogloszenie" EntityType="Self.Ogloszenie" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Uczelnia" EntityType="Self.Uczelnia" />
+          <AssociationSet Name="FK_Kategoria_Kategoria" Association="Self.FK_Kategoria_Kategoria">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Kategoria1" EntitySet="Kategoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Kategoria" Association="Self.FK_Ogloszenie_Kategoria">
+            <End Role="Kategoria" EntitySet="Kategoria" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obserwacja_Konto" Association="Self.FK_Obserwacja_Konto">
+            <End Role="Konto" EntitySet="Konto" />
+            <End Role="Obserwacja" EntitySet="Obserwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Konto" Association="Self.FK_Ogloszenie_Konto">
+            <End Role="Konto" EntitySet="Konto" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Miasto" Association="Self.FK_Ogloszenie_Miasto">
+            <End Role="Miasto" EntitySet="Miasto" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Obserwacja_Ogloszenie" Association="Self.FK_Obserwacja_Ogloszenie">
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+            <End Role="Obserwacja" EntitySet="Obserwacja" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogloszenie_Uczelnia" Association="Self.FK_Ogloszenie_Uczelnia">
+            <End Role="Uczelnia" EntitySet="Uczelnia" />
+            <End Role="Ogloszenie" EntitySet="Ogloszenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Aplikacje_InternetoweEntities1">
+          <EntitySetMapping Name="Kategoria">
+            <EntityTypeMapping TypeName="Model.Kategoria">
+              <MappingFragment StoreEntitySet="Kategoria">
+                <ScalarProperty Name="ID_Kategoria" ColumnName="ID_Kategoria" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="NadKategoria" ColumnName="NadKategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Konto">
+            <EntityTypeMapping TypeName="Model.Konto">
+              <MappingFragment StoreEntitySet="Konto">
+                <ScalarProperty Name="ID_Konto" ColumnName="ID_Konto" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="E_Mail" ColumnName="E_Mail" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
+                <ScalarProperty Name="Rola" ColumnName="Rola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Miasto">
+            <EntityTypeMapping TypeName="Model.Miasto">
+              <MappingFragment StoreEntitySet="Miasto">
+                <ScalarProperty Name="ID_Miasto" ColumnName="ID_Miasto" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obserwacja">
+            <EntityTypeMapping TypeName="Model.Obserwacja">
+              <MappingFragment StoreEntitySet="Obserwacja">
+                <ScalarProperty Name="ID_Obserwacja" ColumnName="ID_Obserwacja" />
+                <ScalarProperty Name="ID_Konto" ColumnName="ID_Konto" />
+                <ScalarProperty Name="ID_Ogloszenie" ColumnName="ID_Ogloszenie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogloszenie">
+            <EntityTypeMapping TypeName="Model.Ogloszenie">
+              <MappingFragment StoreEntitySet="Ogloszenie">
+                <ScalarProperty Name="ID_Ogloszenie" ColumnName="ID_Ogloszenie" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Data_Zamkniecia" ColumnName="Data_Zamkniecia" />
+                <ScalarProperty Name="Data_Zamieszczenia" ColumnName="Data_Zamieszczenia" />
+                <ScalarProperty Name="ID_Kategoria" ColumnName="ID_Kategoria" />
+                <ScalarProperty Name="ID_Konto" ColumnName="ID_Konto" />
+                <ScalarProperty Name="ID_Miasto" ColumnName="ID_Miasto" />
+                <ScalarProperty Name="ID_Uczelnia" ColumnName="ID_Uczelnia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uczelnia">
+            <EntityTypeMapping TypeName="Model.Uczelnia">
+              <MappingFragment StoreEntitySet="Uczelnia">
+                <ScalarProperty Name="ID_Uczelnia" ColumnName="ID_Uczelnia" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

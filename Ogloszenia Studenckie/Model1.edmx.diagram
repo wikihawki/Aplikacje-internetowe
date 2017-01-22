@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="06ad347b62574814a04e6e48e0969ba1" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Kategoria" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Konto" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Miasto" Width="1.5" PointX="3.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Obserwacja" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Ogloszenie" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Uczelnia" Width="1.5" PointX="3.75" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Kategoria_Kategoria" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Ogloszenie_Kategoria" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Obserwacja_Konto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Ogloszenie_Konto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Ogloszenie_Miasto" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Obserwacja_Ogloszenie" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Ogloszenie_Uczelnia" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

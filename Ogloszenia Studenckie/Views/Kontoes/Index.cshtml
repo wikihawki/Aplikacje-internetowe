@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Ogloszenia_Studenckie.Konto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Account/Login.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.E_Mail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Imie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwisko)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Haslo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rola)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.E_Mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Imie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwisko)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Haslo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rola)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Konto }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Konto }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Konto })
+        </td>
+    </tr>
+}
+
+</table>
