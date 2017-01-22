@@ -238,3 +238,32 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+Ogloszenia Studenckie/Service References/Office365/ConnectedService.json
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/net45/Microsoft.IdentityModel.Clients.ActiveDirectory.XML
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.XML
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/netcore45/Microsoft.IdentityModel.Clients.ActiveDirectory.winmd
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/wp/Microsoft.IdentityModel.Clients.ActiveDirectory.XML
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/wpa/Microsoft.IdentityModel.Clients.ActiveDirectory.XML
+Ogloszenia Studenckie/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.2.14.201151115/lib/wpa/Microsoft.IdentityModel.Clients.ActiveDirectory.winmd
+Ogloszenia Studenckie/packages/Microsoft.OData.Client.6.13.0/lib/net40/Microsoft.OData.Client.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Client.6.13.0/lib/portable-net45+wp8+win8+wpa/Microsoft.OData.Client.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Core.6.13.0/lib/dnx451/Microsoft.OData.Core.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Core.6.13.0/lib/dnxcore50/Microsoft.OData.Core.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Core.6.13.0/lib/portable-net40+sl5+wp8+win8+wpa/Microsoft.OData.Core.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Edm.6.13.0/lib/dnx451/Microsoft.OData.Edm.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Edm.6.13.0/lib/dnxcore50/Microsoft.OData.Edm.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.Edm.6.13.0/lib/portable-net40+sl5+wp8+win8+wpa/Microsoft.OData.Edm.xml
+Ogloszenia Studenckie/packages/Microsoft.OData.ProxyExtensions.1.0.35/License-Stable.rtf
+Ogloszenia Studenckie/packages/Microsoft.Office365.Discovery.1.0.22/License-Stable.rtf
+Ogloszenia Studenckie/packages/Microsoft.Office365.SharePoint.1.0.22/License-Stable.rtf
+Ogloszenia Studenckie/packages/Microsoft.Spatial.6.13.0/lib/dnx451/Microsoft.Spatial.xml
+Ogloszenia Studenckie/packages/Microsoft.Spatial.6.13.0/lib/dnxcore50/Microsoft.Spatial.xml
+Ogloszenia Studenckie/packages/Microsoft.Spatial.6.13.0/lib/portable-net40+sl5+wp8+win8+wpa/Microsoft.Spatial.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/net20/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/net35/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/net40/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/net45/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/netcore45/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml
+Ogloszenia Studenckie/packages/Newtonsoft.Json.6.0.5/tools/install.ps1
