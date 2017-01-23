@@ -1,90 +1,133 @@
 ﻿@model Ogloszenia_Studenckie.Ogloszenie
 
+
 @{
-    ViewBag.Title = "Details";
+
+    string nazwa = Model.Tytul;
+    string opis = Model.Opis;
+    var cena = Model.Cena;
+    string miasto = Model.Miasto.Nazwa;
+    string uczel = Model.Uczelnia.Nazwa;
+    string[] obrazy = new string[4]
+    {
+        "http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg",
+        "https://roweroweporady.pl/wp-content/uploads/2014/11/noski-do-pedalow.jpg",
+        "http://images.elektrobike-online.com/sixcms/media.php/6/UB_Smart_eBike_797670_1464205_7216_5412_10C1062_08_seitl.jpg",
+        "http://www.zercustoms.com/news/images/Smart/smart-ebike-5.jpg"
+    };
+    ViewBag.Title = nazwa;
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Ogloszenie</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tytul)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Tytul)
-        </dd>
+<style>
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.9);
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Cena)
-        </dt>
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: auto;
+        max-width: 100%;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Cena)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
+    .close {
+        position: absolute;
+        top: 55px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Data_Zamkniecia)
-        </dt>
+    .alt-link {
+        color: #e3e3e3;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Data_Zamkniecia)
-        </dd>
+    .modal-link {
+        cursor: pointer;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Data_Zamieszczenia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Data_Zamieszczenia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kategoria.Nazwa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kategoria.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Konto.Nazwa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Konto.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Miasto.Nazwa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Miasto.Nazwa)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Uczelnia.Nazwa)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Uczelnia.Nazwa)
-        </dd>
-
-    </dl>
+    }
+</style>
+<h2 class="text-center">@nazwa</h2>
+<div id="myModal" class="modal">
+    <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+    <img class="modal-content" id="img01">
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Ogloszenie }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="well">
+    <div class="row">
+        <div class="col-md-7">
+            @if (obrazy.Length > 0)
+            {<img id="myImg" src="@obrazy[0]" class="modal-link img-rounded img-responsive" onclick="showModal(this.src)">}
+
+        </div>
+
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>@cena zł</h4>
+                </div>
+                <div class="panel-body">
+                    Numer kontaktowy: @Model.Konto.Telefon<br>
+                    E-mail kontaktowy: @Model.Konto.E_Mail<br /><br />
+                    Dodano: @Model.Data_Zamieszczenia
+                </div>
+                <div class="panel-footer">
+                    @uczel - @miasto
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>@Html.ActionLink("Wszystkie", "Index", "Search", null, new { @class = "alt-link" }) > <a href="@Url.Action("Index","Ogloszenies")?kat=1">Studia</a> > <a href="@Url.Action("Index","Ogloszenies")?kat=2">Notatki</a></h4>
+
+        </div>
+        <div class="panel-body">
+            @Html.Raw(opis);
+        </div>
+        <center class="panel-footer">
+            @if (obrazy.Length > 0)
+            {<h4>Galeria</h4> }
+            @for (int i = 0; i < obrazy.Length; i++)
+            {
+                <img id="myImg" src="@obrazy[i]" class="modal-link img-rounded" onclick="showModal(this.src)" style="max-width:30%; display:inline-block">
+            }
+        </center>
+
+    </div>
+</div>
+
+
+<script>
+                function showModal(image) {
+                var modal;
+                modal = document.getElementById('myModal');
+                modal.style.display = "block";
+                document.getElementById('img01').src = image;
+            }
+
+</script>
