@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Ogloszenia_Studenckie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Ogloszenia_Studenckie.Controllers
 {
@@ -26,5 +29,8 @@ namespace Ogloszenia_Studenckie.Controllers
 
             return View();
         }
+
+        
+
     }
 }

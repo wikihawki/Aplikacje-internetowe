@@ -21,7 +21,6 @@ namespace Ogloszenia_Studenckie.Controllers
                       where (a.ID_Uczelnia == ucz || ucz == null) && (a.ID_Kategoria == kat || a.Kategoria.NadKategoria == kat || kat == null) && (a.ID_Miasto == mias || mias == null)
                       && (a.Tytul.Contains(szuk) || a.Opis.Contains(szuk) || szuk==null)
                       select a;
-            
             ViewBag.Kategorie = db.Kategoria;
             ViewBag.Miasta = db.Miasto;
             ViewBag.Uczelnie = db.Uczelnia;
