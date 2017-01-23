@@ -2296,7 +2296,7 @@ fieldset[disabled] .btn-info.active {
 
 .btn-link {
   font-weight: normal;
-  color: #428bca;
+  color: #999999;
   cursor: pointer;
   border-radius: 0;
 }
@@ -2319,8 +2319,8 @@ fieldset[disabled] .btn-link {
 
 .btn-link:hover,
 .btn-link:focus {
-  color: #2a6496;
-  text-decoration: underline;
+  color: #000000;
+  text-decoration: none;
   background-color: transparent;
 }
 
@@ -5257,6 +5257,7 @@ a.thumbnail:focus {
   display: block;
   padding: 10px 15px;
   margin-bottom: -1px;
+  width:100%;
   background-color: #ffffff;
   border: 1px solid #dddddd;
 }
@@ -5399,6 +5400,7 @@ a.list-group-item:focus {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 16px;
+  width:100%;
 }
 
 .panel-title > a {

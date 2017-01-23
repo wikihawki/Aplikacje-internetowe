@@ -1,0 +1,380 @@
+﻿@model IEnumerable<Ogloszenia_Studenckie.Ogloszenie>
+
+
+@{
+
+    var ListaKategorii = ViewBag.Kategorie;
+    var ListaMiast= ViewBag.Miasta;
+    var ListaUczelni = ViewBag.Uczelnie;
+    var Uczelnia = ViewBag.Ucze;
+    var Miasto = ViewBag.Miast;
+    var IDKategorii = ViewBag.Kate;
+    var Kategoria = ViewBag.Katego;
+    var Szukane = ViewBag.Szuka;
+    var Strona = ViewBag.Page;
+    var CenaMin = ViewBag.Start;
+    var CenaMax = ViewBag.End;
+    var LiczbaStron = ViewBag.PagesCount;
+    ViewBag.Title = "Wyniki Wyszukiwania - \"" + Szukane+ "\"";
+}
+<style>
+    .news {
+        padding: 40px;
+        display: inline-block;
+    }
+
+    .offer {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        overflow: hidden;
+        margin: 16px;
+        background: white;
+        border-radius: 75px;
+        text-align: center;
+        border: 1px solid #e3e3e3;
+        float: left;
+    }
+
+        .offer:hover {
+            background: #e3e3e3;
+            text-decoration: none;
+        }
+
+    .image-rounder-offer {
+        width: 144px;
+        height: 144px;
+        float: left;
+        border: 2px solid #e3e3e3;
+        margin: 2px;
+        position: relative;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+
+    .rounded-image {
+        display: inline;
+        margin: 0 auto;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+    }
+
+    .name {
+        border-bottom: 1px solid #e3e3e3;
+        font-size: 16px;
+        display: block;
+        margin-top: 5px;
+        font-weight: bold;
+        background: #999999;
+        color: #ffffff;
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+
+    .offer-contnet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .price {
+        background: #e3e3e3;
+        padding-bottom: 20px;
+        font-size: 150%;
+        height: 100%;
+        width: 150px;
+        float: right;
+        padding-top: 60px;
+    }
+
+    .offer-disc {
+        color: #999999;
+    }
+
+    #schools-links,
+    #cities-links {
+        max-height: 1008px;
+        overflow: auto;
+    }
+
+    }
+</style>
+<div class="panel-title text-center row">
+    
+        @using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+        {
+            if (Uczelnia!= null)
+            {<input type="hidden" value="@Uczelnia" name="ucz">}
+            if (Miasto != null)
+            {<input type="hidden" value="@Miasto" name="mias">}
+            if (Szukane != null)
+            {<input type="hidden" value="@Szukane" name="szuk">}
+            if (CenaMin != null)
+            {<input type="hidden" value="@CenaMin" name="strPrice">}
+            if (CenaMax != null)
+            {<input type="hidden" value="@CenaMax" name="endPrice">}
+
+            <button type="submit" class="btn btn-link col-md-2"><h2>Wszystkie</h2></button>
+        }@{
+            if (Kategoria != null)
+        {
+            if (Kategoria.Kategoria2 != null)
+            {
+                <h1 class="col-md-1">></h1>
+                using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                {
+                    if (Uczelnia != null)
+                    {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
+                        if (CenaMin != null)
+                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                        if (CenaMax != null)
+                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                    <input type="hidden" value="@Kategoria.Kategoria2.ID_Kategoria" name="kat">
+                    <button type="submit" class="btn btn-link col-md-2"><h2>@Kategoria.Kategoria2.Nazwa</h2></button>
+                }
+            }
+       
+                <h1 class="col-md-1">></h1>
+                using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                {
+                    if (Uczelnia != null)
+                    {<input type="hidden" value="@Uczelnia" name="ucz">}
+                    if (Miasto != null)
+                    {<input type="hidden" value="@Miasto" name="mias">}
+                    if (Szukane != null)
+                    {<input type="hidden" value="@Szukane" name="szuk">}
+                    if (CenaMin != null)
+                    {<input type="hidden" value="@CenaMin" name="strPrice">}
+                    if (CenaMax != null)
+                    {<input type="hidden" value="@CenaMax" name="endPrice">}
+                    <input type="hidden" value="@Kategoria.ID_Kategoria" name="kat">
+                    <button type="submit" class="btn btn-link col-md-2"><h2>@Kategoria.Nazwa</h2></button>
+                }
+            }
+        }
+    <div class="col-md-1"><h1>></h1></div>
+    <div class="btn btn-link col-md-3"><h2>@Szukane</h2></div>
+</div> <!-- Na podstawie parametrów widoku, to co w [] nieobowiązkowe -->
+<div class="row well">
+    <div class="col-sm-2">
+        <h3>Kategoria</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading panel-default">
+                @{
+                    if (Kategoria == null)
+                    {<h4>Wszystkie Kategorie</h4>}
+                    else
+                    {
+                        if (Kategoria.NadKategoria == null)
+                        {<h4>@Kategoria.Nazwa</h4>}
+                        else
+                        {<h4>@Kategoria.Kategoria2.Nazwa</h4>}
+                            }
+                }
+            </div>
+            
+            <div class="list-group">
+                @foreach (var cat in ListaKategorii)
+                {
+                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                    {
+                        if (Uczelnia != null)
+                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
+                        if (CenaMin != null)
+                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                        if (CenaMax != null)
+                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                        <input type="hidden" value="@cat.ID_Kategoria" name="kat">
+                        <button type="submit" class="list-group-item@(cat.ID_Kategoria == IDKategorii ? " active" : "")">@cat.Nazwa</button>
+                    }
+                    <!-- <a href="#" class="list-group-item">@cat.Nazwa</a> zamiast i==3 to będzie zależne od wybranej kategorii/podkategorii, jeśli nie będzie wybranej kategorii to wyświetla się lista katergorii, jeśli jest to lista podkategorii tej kategorii -->
+                }
+            </div>
+            
+        </div>
+
+        
+        <h3>Krtyteria</h3>
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-default"><h4>Cena</h4></div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                    {
+                        if (ListaKategorii != null)
+                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Uczelnia != null)
+                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
+                        <div class="form-group">
+                            <label for="from">Od:</label>
+                            <input type="number" class="form-control" value="0" name="strPrice" id="from">
+                        </div>
+                        <div class="form-group">
+                            <label for="to">Do:</label>
+                            <input type="number" class="form-control" id="to" name="endPrice">
+                        </div>
+                        <center><button type="submit" class="btn btn-default">Szukaj</button></center>
+                    }
+                </div>
+            </div>
+            <div class="panel panel-default list-group">
+                <div class="panel-heading panel-default"><h4>Lokalizacja</h4></div><!-- Jeśli -->
+
+                <input type="text" class="form-control" id="school-name" onkeyup="filterList()" placeholder="Uczelnia lub miasto" title="Wpisz nazwę uczelni lub miasta">
+                <center class="panel-group">
+                    <div class="panel panel-default">
+                        <a data-toggle="collapse" href="#schools-links">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    Wybierz Uczelnie
+                                </h4>
+                            </div>
+                        </a>
+                        <div id="schools-links" class="panel-collapse collapse">
+                            <div class="list-group">
+                                @foreach (var ucz in ListaUczelni)
+                                {
+                                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                                    {
+                                        if (ListaKategorii != null)
+                                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                                        if (Miasto != null)
+                                        {<input type="hidden" value="@Miasto" name="mias">}
+                                        if (Szukane != null)
+                                        {<input type="hidden" value="@Szukane" name="szuk">}
+                                        if (CenaMin != null)
+                                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                                        if (CenaMax != null)
+                                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                                        <input type="hidden" value="@ucz.ID_Uczelnia" name="ucz">
+                                        <button type="submit" class="list-group-item@(ucz.ID_Uczelnia == Uczelnia ? " active" : "")">@ucz.Nazwa</button>
+                                    }
+                                <!--    <a href="#" class="list-group-item@(ucz.ID_Uczelnia == Uczelnia ? " active" : "")">@ucz.Nazwa</a>   -->
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </center>
+                <center class="panel-group">
+                    <div class="panel panel-default">
+                        <a data-toggle="collapse" href="#cities-links">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    Wybierz Miasto
+                                </h4>
+                            </div>
+                        </a>
+                        <div id="cities-links" class="panel-collapse collapse">
+                            <div class="list-group">
+                                @foreach (var mia in ListaMiast)
+                                {
+                                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                                    {
+                                        if (ListaKategorii != null)
+                                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                                        if (Uczelnia != null)
+                                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                                        if (Szukane != null)
+                                        {<input type="hidden" value="@Szukane" name="szuk">}
+                                        if (CenaMin != null)
+                                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                                        if (CenaMax != null)
+                                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                                        <input type="hidden" value="@mia.ID_Miasto" name="mias">
+                                        <button type="submit" class="list-group-item@(mia.ID_Miasto == Miasto ? " active" : "")">@mia.Nazwa</button>
+                                    }
+                                    <!--<a href="#" class="list-group-item@(mia.ID_Miasto==Miasto ? " active" : "")">@mia.Nazwa</a>   -->
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </center>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="col-sm-10">
+        @foreach (var item in Model)
+        {
+            <a href="@Url.Action("Details","Ogloszenies",new {ID=item.ID_Ogloszenie })" class="offer">
+                <div class="image-rounder-offer">
+                    <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
+                </div>
+                <div class="price">
+                    <b>@Html.DisplayFor(modelItem => item.Cena) zł</b>
+                </div>
+                <div class="name">
+
+                    @Html.DisplayFor(modelItem => item.Tytul)
+
+                </div>
+                <h5 style="color:black">
+                    @Html.DisplayFor(modelItem => item.Uczelnia.Nazwa)
+                </h5>
+                <div class="offer-disc">
+                    @Html.DisplayFor(modelItem => item.Opis)
+                </div>
+                <div>
+
+                </div>
+            </a>
+        }
+
+        <center>
+            <ul class="pagination">
+                <li><a href="#">Poprzednia</a></li>
+                @for (int i = 1; i <= LiczbaStron+1; i++)
+                {
+                    <li class="@(i == Strona ? "active" : "")"><a href="#">@i</a></li>
+                }
+                <li><a href="#">Następna</a></li>
+            </ul>
+
+        </center>
+    </div>
+</div>
+<!--for (i = 0; i < citiesList.length; i++) {
+            city = citiesList[i].innerHTML.toUpperCase();;
+            if (city.indexOf(filterSch) > -1) citiesList[i].style.display = "";
+            else citiesList[i].style.display = "none";
+        }-->
+<script>
+    function filterList() {
+        var regions, filterReg, cities, filterCit, citiesList, city, i, schools, schoolsList, school, abbre, schoolname, id, filterSch;
+
+        schoolsList = document.getElementById("schools-links").getElementsByTagName("button");
+        schools = document.getElementById("school-name");
+        filterSch = schools.value.toUpperCase();
+        citiesList = document.getElementById("cities-links").getElementsByTagName("button");
+        for (i = 0; i < schoolsList.length; i++) {
+            school = schoolsList[i].innerHTML.toUpperCase();
+            if (school.indexOf(filterSch) > -1) schoolsList[i].style.display = "";
+            else schoolsList[i].style.display = "none";
+        }
+        for (i = 0; i < citiesList.length; i++) {
+            city = citiesList[i].innerHTML.toUpperCase();;
+            if (city.indexOf(filterSch) > -1) citiesList[i].style.display = "";
+            else citiesList[i].style.display = "none";
+        }
+    }
+</script>

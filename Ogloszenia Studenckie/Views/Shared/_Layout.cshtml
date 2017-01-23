@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>
                         <div style="display:inline-block; padding:8px">
-                            @Html.ActionLink("Dodaj Swoje ogłoszenie", "Create", "Offer", null, new { @class = "btn btn-default" })
+                            @Html.ActionLink("Dodaj Swoje ogłoszenie", "Create", "Ogloszenies", null, new { @class = "btn btn-default" })
                         </div>
                     </li>
                 </ul>
@@ -35,18 +35,19 @@
     <div class="container body-content">
         <div class="page-header" style="margin-top:-5px; ">
             
-            @using (Html.BeginForm("Index", "Search", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-inline well well-sm", role = "form" }))
+            @using (Html.BeginForm("Index", "Ogloszenies", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Get, new { @class = "form-inline well well-sm", role = "form" }))
             {
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Szukaj">
+                    <input type="text" class="form-control" name="szuk" placeholder="Szukaj">
                     <div class="input-group-addon" style="padding:0;border:0; width:160px">
-                        <select class="form-control " id="sel1">
-                            <option>Wszystkie kategorie</option>
-                            <option>Social</option>
-                            <option>Studia</option>
-                            <option>Kwaterunek</option>
-                            <option>Sprzedam</option>
-                            <option>Inne</option>
+                        <select class="form-control" name="kat" id="sel1">
+                            <option value="">Wszystkie kategorie</option>
+                            <option value="3">Social</option>
+                            <option value="1">Studia</option>
+                            <option value="4">Kwaterunek</option>
+                            <option value="5">Sprzedam</option>
+                            <option value="6">Praca</option>
+                            <option value="7">Inne</option>
                         </select>
                     </div>
                         <div class="input-group-btn">
@@ -66,9 +67,12 @@
                                 
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje do wynajęcia</a></li>
-                                <li><a href="#">Inne</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=1">Studia</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=2">Notatki</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=8">Korepetycje</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=9">Drukowanie</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=10">Konstultacje projektowe</a></li>
                             </ul>
                         </div>
                     </div>
@@ -79,9 +83,12 @@
                               Kwaterunek
                               </button>
                               <ul class="dropdown-menu">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje do wynajęcia</a></li>
-                                <li><a href="#">Inne?</a></li>
+                                  <li><a href="@Url.Action("Index","Ogloszenies")?kat=3">Kwaterunek</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="@Url.Action("Index","Ogloszenies")?kat=11">Akademiki</a></li>
+                                  <li><a href="@Url.Action("Index","Ogloszenies")?kat=12">Pokoje</a></li>
+                                  <li><a href="@Url.Action("Index","Ogloszenies")?kat=13">Szukam</a></li>
+                                  <li><a href="@Url.Action("Index","Ogloszenies")?kat=14">Meta</a></li>
                               </ul>
                         </div> 
                     </div>
@@ -92,9 +99,14 @@
                                 
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje do wynajęcia</a></li>
-                                <li><a href="#">Inne?</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=4">Social</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=15">Imprezey</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=16">Kluby studenckie</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=17">Wyjazdy</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=28">Wolątariat</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=30">Na chwilę</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -105,36 +117,41 @@
                                 
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje do wynajęcia</a></li>
-                                <li><a href="#">Inne?</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=5">Sprzedam</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=18">Elektronika</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=19">Meble</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=20">AGD&RTV</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=22">Jedzenie i picie</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=21">Motoryzacja</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=23">Ubrania</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=24">Sprzęt Sportowy</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
-                                Kwaterunek
+                                Praca
                                 
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje do wynajęcia</a></li>
-                                <li><a href="#">Inne?</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=6">Praca</a></li>
+                                <li class="divider"></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=25">Praktyki</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=26">Praca dorywcza</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=27">Praca wakacyjna</a></li>
+                                <li><a href="@Url.Action("Index","Ogloszenies")?kat=28">Stała praca</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="dropdown">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+                            <a href="@Url.Action("Index","Ogloszenies")?kat=7" class="btn dropdown-toggle" >
                                 Inne
                                 
-                            </button>
-                            <ul class="dropdown-menu ">
-                                <li><a href="#">Akademiki</a></li>
-                                <li><a href="#">Pokoje</a></li>
-                                <li><a href="#">Inne?</a></li>
-                            </ul>
+                            </a>
+                            
                         </div>
                     </div>
                 </div>
