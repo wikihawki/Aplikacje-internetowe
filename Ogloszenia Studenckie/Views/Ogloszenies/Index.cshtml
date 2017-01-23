@@ -2,7 +2,20 @@
 
 
 @{
-    ViewBag.Title = "Wyniki Wyszukiwania";
+
+    var ListaKategorii = ViewBag.Kategorie;
+    var ListaMiast= ViewBag.Miasta;
+    var ListaUczelni = ViewBag.Uczelnie;
+    var Uczelnia = ViewBag.Ucze;
+    var Miasto = ViewBag.Miast;
+    var IDKategorii = ViewBag.Kate;
+    var Kategoria = ViewBag.Katego;
+    var Szukane = ViewBag.Szuka;
+    var Strona = ViewBag.Page;
+    var CenaMin = ViewBag.Start;
+    var CenaMax = ViewBag.End;
+    var LiczbaStron = ViewBag.PagesCount;
+    ViewBag.Title = "Wyniki Wyszukiwania - \"" + Szukane+ "\"";
 }
 <style>
     .news {
@@ -92,32 +105,134 @@
 
     }
 </style>
-<div class="panel-title text-center"><h2>@Html.ActionLink("Wszystkie", "Index", "Search") > [Kategoria] > [Podkategoria] > [Fraza]</h2></div> <!-- Na podstawie parametrów widoku, to co w [] nieobowiązkowe -->
+<div class="panel-title text-center row">
+    
+        @using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+        {
+            if (Uczelnia!= null)
+            {<input type="hidden" value="@Uczelnia" name="ucz">}
+            if (Miasto != null)
+            {<input type="hidden" value="@Miasto" name="mias">}
+            if (Szukane != null)
+            {<input type="hidden" value="@Szukane" name="szuk">}
+            if (CenaMin != null)
+            {<input type="hidden" value="@CenaMin" name="strPrice">}
+            if (CenaMax != null)
+            {<input type="hidden" value="@CenaMax" name="endPrice">}
+
+            <button type="submit" class="btn btn-link col-md-2"><h2>Wszystkie</h2></button>
+        }@{
+            if (Kategoria != null)
+        {
+            if (Kategoria.Kategoria2 != null)
+            {
+                <h1 class="col-md-1">></h1>
+                using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                {
+                    if (Uczelnia != null)
+                    {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
+                        if (CenaMin != null)
+                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                        if (CenaMax != null)
+                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                    <input type="hidden" value="@Kategoria.Kategoria2.ID_Kategoria" name="kat">
+                    <button type="submit" class="btn btn-link col-md-2"><h2>@Kategoria.Kategoria2.Nazwa</h2></button>
+                }
+            }
+       
+                <h1 class="col-md-1">></h1>
+                using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                {
+                    if (Uczelnia != null)
+                    {<input type="hidden" value="@Uczelnia" name="ucz">}
+                    if (Miasto != null)
+                    {<input type="hidden" value="@Miasto" name="mias">}
+                    if (Szukane != null)
+                    {<input type="hidden" value="@Szukane" name="szuk">}
+                    if (CenaMin != null)
+                    {<input type="hidden" value="@CenaMin" name="strPrice">}
+                    if (CenaMax != null)
+                    {<input type="hidden" value="@CenaMax" name="endPrice">}
+                    <input type="hidden" value="@Kategoria.ID_Kategoria" name="kat">
+                    <button type="submit" class="btn btn-link col-md-2"><h2>@Kategoria.Nazwa</h2></button>
+                }
+            }
+        }
+    <div class="col-md-1"><h1>></h1></div>
+    <div class="btn btn-link col-md-3"><h2>@Szukane</h2></div>
+</div> <!-- Na podstawie parametrów widoku, to co w [] nieobowiązkowe -->
 <div class="row well">
     <div class="col-sm-2">
-        <h3>Podkategoria/<br>Kategoria</h3>
-        <div class="list-group">
-            @foreach(var cat in ViewBag.Kategorie)
-            {
-                <a href="#" class="list-group-item">@cat.Nazwa</a> <!-- zamiast i==3 to będzie zależne od wybranej kategorii/podkategorii, jeśli nie będzie wybranej kategorii to wyświetla się lista katergorii, jeśli jest to lista podkategorii tej kategorii -->
-            }
+        <h3>Kategoria</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading panel-default">
+                @{
+                    if (Kategoria == null)
+                    {<h4>Wszystkie Kategorie</h4>}
+                    else
+                    {
+                        if (Kategoria.NadKategoria == null)
+                        {<h4>@Kategoria.Nazwa</h4>}
+                        else
+                        {<h4>@Kategoria.Kategoria2.Nazwa</h4>}
+                            }
+                }
+            </div>
+            
+            <div class="list-group">
+                @foreach (var cat in ListaKategorii)
+                {
+                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                    {
+                        if (Uczelnia != null)
+                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
+                        if (CenaMin != null)
+                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                        if (CenaMax != null)
+                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                        <input type="hidden" value="@cat.ID_Kategoria" name="kat">
+                        <button type="submit" class="list-group-item@(cat.ID_Kategoria == IDKategorii ? " active" : "")">@cat.Nazwa</button>
+                    }
+                    <!-- <a href="#" class="list-group-item">@cat.Nazwa</a> zamiast i==3 to będzie zależne od wybranej kategorii/podkategorii, jeśli nie będzie wybranej kategorii to wyświetla się lista katergorii, jeśli jest to lista podkategorii tej kategorii -->
+                }
+            </div>
+            
         </div>
+
+        
         <h3>Krtyteria</h3>
         <div class="panel-group">
             <div class="panel panel-default">
                 <div class="panel-heading panel-default"><h4>Cena</h4></div>
                 <div class="panel-body">
-                    <form>
+                    @using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                    {
+                        if (ListaKategorii != null)
+                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                        if (Miasto != null)
+                        {<input type="hidden" value="@Miasto" name="mias">}
+                        if (Uczelnia != null)
+                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                        if (Szukane != null)
+                        {<input type="hidden" value="@Szukane" name="szuk">}
                         <div class="form-group">
                             <label for="from">Od:</label>
-                            <input type="number" class="form-control" id="from">
+                            <input type="number" class="form-control" value="0" name="strPrice" id="from">
                         </div>
                         <div class="form-group">
                             <label for="to">Do:</label>
-                            <input type="number" class="form-control" id="to">
+                            <input type="number" class="form-control" id="to" name="endPrice">
                         </div>
                         <center><button type="submit" class="btn btn-default">Szukaj</button></center>
-                    </form>
+                    }
                 </div>
             </div>
             <div class="panel panel-default list-group">
@@ -135,9 +250,24 @@
                         </a>
                         <div id="schools-links" class="panel-collapse collapse">
                             <div class="list-group">
-                                @foreach(var ucz in ViewBag.Uczelnie)
+                                @foreach (var ucz in ListaUczelni)
                                 {
-                                    <a href="#" class="list-group-item">@ucz.Nazwa</a> <!--  -->
+                                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                                    {
+                                        if (ListaKategorii != null)
+                                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                                        if (Miasto != null)
+                                        {<input type="hidden" value="@Miasto" name="mias">}
+                                        if (Szukane != null)
+                                        {<input type="hidden" value="@Szukane" name="szuk">}
+                                        if (CenaMin != null)
+                                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                                        if (CenaMax != null)
+                                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                                        <input type="hidden" value="@ucz.ID_Uczelnia" name="ucz">
+                                        <button type="submit" class="list-group-item@(ucz.ID_Uczelnia == Uczelnia ? " active" : "")">@ucz.Nazwa</button>
+                                    }
+                                <!--    <a href="#" class="list-group-item@(ucz.ID_Uczelnia == Uczelnia ? " active" : "")">@ucz.Nazwa</a>   -->
                                 }
                             </div>
                         </div>
@@ -154,9 +284,24 @@
                         </a>
                         <div id="cities-links" class="panel-collapse collapse">
                             <div class="list-group">
-                                @foreach (var mia in ViewBag.Miasta)
+                                @foreach (var mia in ListaMiast)
                                 {
-                                    <a href="#" class="list-group-item">@mia.Nazwa</a> <!--  -->
+                                    using (Html.BeginForm("Index", "Ogloszenies", FormMethod.Get))
+                                    {
+                                        if (ListaKategorii != null)
+                                        {<input type="hidden" value="@IDKategorii" name="kat">}
+                                        if (Uczelnia != null)
+                                        {<input type="hidden" value="@Uczelnia" name="ucz">}
+                                        if (Szukane != null)
+                                        {<input type="hidden" value="@Szukane" name="szuk">}
+                                        if (CenaMin != null)
+                                        {<input type="hidden" value="@CenaMin" name="strPrice">}
+                                        if (CenaMax != null)
+                                        {<input type="hidden" value="@CenaMax" name="endPrice">}
+                                        <input type="hidden" value="@mia.ID_Miasto" name="mias">
+                                        <button type="submit" class="list-group-item@(mia.ID_Miasto == Miasto ? " active" : "")">@mia.Nazwa</button>
+                                    }
+                                    <!--<a href="#" class="list-group-item@(mia.ID_Miasto==Miasto ? " active" : "")">@mia.Nazwa</a>   -->
                                 }
                             </div>
                         </div>
@@ -171,7 +316,7 @@
     <div class="col-sm-10">
         @foreach (var item in Model)
         {
-            <a href="@Url.Action("Details","Offer",new {ID=1 })" class="offer">
+            <a href="@Url.Action("Details","Ogloszenies",new {ID=item.ID_Ogloszenie })" class="offer">
                 <div class="image-rounder-offer">
                     <img src="http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg" class="rounded-image" />
                 </div>
@@ -198,14 +343,9 @@
         <center>
             <ul class="pagination">
                 <li><a href="#">Poprzednia</a></li>
-                @{
-                    int pageN = 10;
-                    int curr = 2;
-                }
-
-                @for (int i = 1; i <= pageN; i++)
+                @for (int i = 1; i <= LiczbaStron+1; i++)
                 {
-                    <li class="@(i == curr ? "active" : "")"><a href="#">@i</a></li>
+                    <li class="@(i == Strona ? "active" : "")"><a href="#">@i</a></li>
                 }
                 <li><a href="#">Następna</a></li>
             </ul>
@@ -222,10 +362,10 @@
     function filterList() {
         var regions, filterReg, cities, filterCit, citiesList, city, i, schools, schoolsList, school, abbre, schoolname, id, filterSch;
 
-        schoolsList = document.getElementById("schools-links").getElementsByTagName("a");
+        schoolsList = document.getElementById("schools-links").getElementsByTagName("button");
         schools = document.getElementById("school-name");
         filterSch = schools.value.toUpperCase();
-        citiesList = document.getElementById("cities-links").getElementsByTagName("a");
+        citiesList = document.getElementById("cities-links").getElementsByTagName("button");
         for (i = 0; i < schoolsList.length; i++) {
             school = schoolsList[i].innerHTML.toUpperCase();
             if (school.indexOf(filterSch) > -1) schoolsList[i].style.display = "";

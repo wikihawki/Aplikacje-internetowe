@@ -15,18 +15,41 @@ namespace Ogloszenia_Studenckie.Controllers
         private Aplikacje_InternetoweEntities1 db = new Aplikacje_InternetoweEntities1();
 
         // GET: Ogloszenies
-        public ActionResult Index(int? kat, int? mias, int? ucz, string szuk, int? page=1)
+        public ActionResult Index(int? kat, int? mias, int? ucz, string szuk, int? endPrice, int page=1, int strPrice=0)
         {
             var ogloszenie = from a in db.Ogloszenie
                       where (a.ID_Uczelnia == ucz || ucz == null) && (a.ID_Kategoria == kat || a.Kategoria.NadKategoria == kat || kat == null) && (a.ID_Miasto == mias || mias == null)
                       && (a.Tytul.Contains(szuk) || a.Opis.Contains(szuk) || szuk==null)
                       select a;
-            ogloszenie= ogloszenie.
-            ViewBag.Kategorie = db.Kategoria;
+            int? parentCatID = kat;
+            Kategoria currentCategory = null;
+            Kategoria parent = null;
+            if (kat != null)
+            {
+                
+                currentCategory = (from k in db.Kategoria where k.ID_Kategoria == kat select k).ToList().First();
+                parentCatID = currentCategory.NadKategoria;
+                if (currentCategory.Kategoria2 != null) parent = currentCategory.Kategoria2;
+            }
+            if (parentCatID == null) parentCatID = kat;
+            ViewBag.Kategorie = from kk in db.Kategoria where kk.NadKategoria == kat || kk.NadKategoria == parentCatID select kk;
             ViewBag.Miasta = db.Miasto;
             ViewBag.Uczelnie = db.Uczelnia;
+            ViewBag.Ucze = ucz;
+            ViewBag.Kate = kat;
+            ViewBag.Miast = mias;
+            ViewBag.Page = page;
+            ViewBag.Szuka = szuk;
+            ViewBag.End = endPrice;
+            ViewBag.Start = strPrice;
+            ViewBag.Katego = currentCategory;
+            ViewBag.Parent = parent;
+            var model = ogloszenie.ToList();
+            ViewBag.PagesCount = model.Count / 25;
+            if (model.Count > page * 25) model = model.GetRange((page - 1) * 25, 25);
+            else model = model.GetRange((page - 1) * 25, model.Count - (page - 1) * 25);
             //var ogloszenie = db.Ogloszenie.Include(o => o.Kategoria).Include(o => o.Konto).Include(o => o.Miasto).Include(o => o.Uczelnia);
-            return View(ogloszenie.ToList());
+            return View(model);
         }
 
         // GET: Ogloszenies/Details/5
