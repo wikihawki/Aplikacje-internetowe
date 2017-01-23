@@ -15,9 +15,17 @@ namespace Ogloszenia_Studenckie.Controllers
         private Aplikacje_InternetoweEntities1 db = new Aplikacje_InternetoweEntities1();
 
         // GET: Ogloszenies
-        public ActionResult Index()
+        public ActionResult Index(int? kat, int? mias, int? ucz, string szuk, int? page=1)
         {
-            var ogloszenie = db.Ogloszenie.Include(o => o.Kategoria).Include(o => o.Konto).Include(o => o.Miasto).Include(o => o.Uczelnia);
+            var ogloszenie = from a in db.Ogloszenie
+                      where (a.ID_Uczelnia == ucz || ucz == null) && (a.ID_Kategoria == kat || a.Kategoria.NadKategoria == kat || kat == null) && (a.ID_Miasto == mias || mias == null)
+                      && (a.Tytul.Contains(szuk) || a.Opis.Contains(szuk) || szuk==null)
+                      select a;
+            ogloszenie= ogloszenie.
+            ViewBag.Kategorie = db.Kategoria;
+            ViewBag.Miasta = db.Miasto;
+            ViewBag.Uczelnie = db.Uczelnia;
+            //var ogloszenie = db.Ogloszenie.Include(o => o.Kategoria).Include(o => o.Konto).Include(o => o.Miasto).Include(o => o.Uczelnia);
             return View(ogloszenie.ToList());
         }
 
