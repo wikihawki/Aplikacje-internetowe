@@ -10,7 +10,7 @@ namespace Ogloszenia_Studenckie.DAL
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
+            if (HttpContext.Current.Session["UserID"] == null)
             {
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
@@ -19,8 +19,7 @@ namespace Ogloszenia_Studenckie.DAL
                 }
                 else
                 {
-                    filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl + "?ReturnUrl=" +
-                         filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
+                    filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl);
                 }
             }
             else

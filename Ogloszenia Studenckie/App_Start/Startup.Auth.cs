@@ -13,7 +13,7 @@ namespace Ogloszenia_Studenckie
     {
         public void ConfigureAuth(IAppBuilder app)
         {
-
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

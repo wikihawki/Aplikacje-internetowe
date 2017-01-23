@@ -59,10 +59,9 @@ namespace Ogloszenia_Studenckie.Controllers
 
                 Session.Clear();
                 System.Web.HttpContext.Current.Session.RemoveAll();
-
                 // Last we redirect to a controller/action that requires authentication to ensure a redirect takes place
                 // this clears the Request.IsAuthenticated flag since this triggers a new request
-                return RedirectToLocal();
+                return RedirectToAction("Index","Home");
             }
             catch
             {
@@ -80,7 +79,7 @@ namespace Ogloszenia_Studenckie.Controllers
             FormsAuthentication.SetAuthCookie(userName, isPersistent);
         }
 
-        //GET: RedirectToLocal
+     
         private ActionResult RedirectToLocal(string returnURL = "")
         {
             try
@@ -109,28 +108,37 @@ namespace Ogloszenia_Studenckie.Controllers
                     // Ensure we have a valid viewModel to work with
                     if (!ModelState.IsValid)
                         return View(entity);
-                    var credential = from c in db.Konto where c.E_Mail == entity.Username && c.Haslo == entity.Password select c;
-
-                    var userInfo = credential.ToList().ElementAt(0);
-                    if (credential.Count()!=0)
+                    var credential = (from c in db.Konto where c.E_Mail == entity.Username && c.Haslo == entity.Password select c).ToList();
+                    if(credential.Count() == 0)
                     {
-                        //Login Success
-                        //For Set Authentication in Cookie (Remeber ME Option)
-                        SignInRemember(entity.Username, entity.isRemember);
-
-                        //Set A Unique ID in session
-                        Session["UserID"] = userInfo.ID_Konto;
-
-                        // If we got this far, something failed, redisplay form
-                        // return RedirectToAction("Index", "Dashboard");
-                        return RedirectToAction("Index","Home");
-                    }
-                    else
-                    {
-                        //Login Fail
-                        TempData["ErrorMSG"] = "Access Denied! Wrong Credential";
+                        TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
                         return View(entity);
                     }
+                    else {
+                       
+                        if (credential.Count() != 0)
+                        {
+
+                            var userInfo = credential.ElementAt(0);
+                            //Login Success
+                            //For Set Authentication in Cookie (Remeber ME Option)
+                            SignInRemember(entity.Username, entity.isRemember);
+
+                            //Set A Unique ID in session
+                            Session["UserID"] = userInfo.ID_Konto;
+
+                            // If we got this far, something failed, redisplay form
+                            // return RedirectToAction("Index", "Dashboard");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            //Login Fail
+                            TempData["ErrorMSG"] = "Access Denied! Wrong Credential";
+                            return View(entity);
+                        }
+                    }
+                    
                 }
             }
             catch
@@ -139,7 +147,27 @@ namespace Ogloszenia_Studenckie.Controllers
             }
 
         }
-       
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            if (ModelState.IsValid)
+            {
+                var db = new DefaultConnection(); (?? is this what your context is called?)
+        db.users.Add(new User
+        {
+            Id_Company = model.u.Id_Company,
+            Name = model.u.Name
+        });
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 

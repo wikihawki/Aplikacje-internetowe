@@ -1,4 +1,5 @@
-﻿using Ogloszenia_Studenckie.Models;
+﻿using Ogloszenia_Studenckie.DAL;
+using Ogloszenia_Studenckie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Ogloszenia_Studenckie.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
