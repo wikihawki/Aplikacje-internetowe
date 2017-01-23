@@ -1,0 +1,91 @@
+﻿@model Ogloszenia_Studenckie.Ogloszenie
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Account/Login.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ogloszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Zamkniecia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Zamkniecia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Zamieszczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Zamieszczenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoria.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoria.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Konto.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Konto.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miasto.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miasto.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uczelnia.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uczelnia.Nazwa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Ogloszenie }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

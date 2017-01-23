@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Ogloszenia_Studenckie.Ogloszenie>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Account/Login.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cena)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opis)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Zamkniecia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Zamieszczenia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kategoria.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Konto.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Miasto.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uczelnia.Nazwa)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opis)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Zamkniecia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Zamieszczenia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kategoria.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Konto.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Miasto.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uczelnia.Nazwa)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_Ogloszenie }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_Ogloszenie }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_Ogloszenie })
+        </td>
+    </tr>
+}
+
+</table>
