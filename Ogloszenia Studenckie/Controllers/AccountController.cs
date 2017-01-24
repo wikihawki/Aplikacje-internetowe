@@ -1,8 +1,10 @@
 ﻿using Ogloszenia_Studenckie.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Security.Principal;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -147,26 +149,74 @@ namespace Ogloszenia_Studenckie.Controllers
             }
 
         }
+        [HttpGet]
+        public ActionResult Register(string returnURL)
+        {
+            try
+            {
+                // We do not want to use any existing identity information
+                EnsureLoggedOut();
 
+                // Store the originating URL so we can attach it to a form field
 
+                return View();
+            }
+            catch
+            {
+                throw;
+            }
+        }
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(RegisterVM entity)
         {
             if (ModelState.IsValid)
             {
-                var db = new DefaultConnection(); (?? is this what your context is called?)
-        db.users.Add(new User
-        {
-            Id_Company = model.u.Id_Company,
-            Name = model.u.Name
+                db.Konto.Add(new Konto
+                {
+                    Nazwa=entity.Nazwa,
+                    E_Mail = entity.E_Mail,
+                    Imie=entity.Imie,
+                    Nazwisko=entity.Nazwisko,
+                    Telefon=entity.Telefon,
+                    Haslo=entity.Haslo,
+                    Rola="2"
         });
-                db.SaveChanges();
+                SaveChanges(db);
+                ModelState.Clear();
+                ViewBag.Message = "Rejestracja zakończona pomyślnie";
                 return RedirectToAction("Index");
             }
 
             
             return RedirectToAction("Index", "Home");
+        }
+
+        private void SaveChanges(Aplikacje_InternetoweEntities1 context)
+        {
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var failure in ex.EntityValidationErrors)
+                {
+                    sb.AppendFormat("{0} failed validation\n", failure.Entry.Entity.GetType());
+                    foreach (var error in failure.ValidationErrors)
+                    {
+                        sb.AppendFormat("- {0} : {1}", error.PropertyName, error.ErrorMessage);
+                        sb.AppendLine();
+                    }
+                }
+
+                throw new DbEntityValidationException(
+                    "Entity Validation Failed - errors follow:\n" +
+                    sb.ToString(), ex
+                ); // Add the original exception as the innerException
+            }
         }
 
     }
