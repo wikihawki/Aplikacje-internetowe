@@ -1,0 +1,91 @@
+﻿@model Ogloszenia_Studenckie.Ogloszenie
+
+@{
+    ViewBag.Title = "AddFile";
+}
+
+<h2>AddFile</h2>
+
+<div>
+    <h4>Ogloszenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Zamkniecia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Zamkniecia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data_Zamieszczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data_Zamieszczenia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoria.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoria.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Miasto.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Miasto.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uczelnia.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uczelnia.Nazwa)
+        </dd>
+
+    </dl>
+</div>
+
+@using (Html.BeginForm("AddFile", "Ogloszenies", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="files" id="file" accept="image/*" multiple /><br><br>
+    <input type="text" name="aidid" id="aidid" class="hidden" value="@Model.ID_Ogloszenie" />
+    <input type="submit" value="Dodaj" class="btn btn-primary" />
+    <br><br>
+    <h4 class="alert alert-danger @(ViewBag.Message==null ?"hidden":"")">@ViewBag.Message</h4>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

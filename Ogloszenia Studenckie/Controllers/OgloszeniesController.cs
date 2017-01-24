@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using Ogloszenia_Studenckie;
@@ -64,6 +65,28 @@ namespace Ogloszenia_Studenckie.Controllers
             {
                 return HttpNotFound();
             }
+List<string> imageList = new List<string>();
+            try
+            {
+                List<string> filelist = new List<string>(Directory.GetFiles(Server.MapPath("~/Content/Olg_" + id)));
+                string mime;
+                
+                for (int i = filelist.Count - 1; i >= 0; i--)
+                    {
+                        filelist[i] = filelist[i].Replace(Request.ServerVariables["APPL_PHYSICAL_PATH"], "/");
+                    filelist[i] = filelist[i].Replace("\\", "/");
+                    string temp = Request.ServerVariables["APPL_PHYSICAL_PATH"];
+                        mime = (MimeMapping.GetMimeMapping(filelist[i]));
+                        mime = mime.Remove(mime.IndexOf('/'));
+
+                            imageList.Add(filelist[i]);
+                            filelist.RemoveAt(i);
+                    }
+            }
+            catch
+            {
+            }
+ViewBag.images = imageList;
             return View(ogloszenie);
         }
 
@@ -86,9 +109,9 @@ namespace Ogloszenia_Studenckie.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Ogloszenie.Add(ogloszenie);
+                var temp = db.Ogloszenie.Add(ogloszenie);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AddFile", new { @id = temp.ID_Ogloszenie });
             }
 
             ViewBag.ID_Kategoria = new SelectList(db.Kategoria, "ID_Kategoria", "Nazwa", ogloszenie.ID_Kategoria);
@@ -170,6 +193,55 @@ namespace Ogloszenia_Studenckie.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult AddFile(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ogloszenie ogl = db.Ogloszenie.Find(id);
+            if (ogl == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ogl);
+        }
+        [HttpPost]
+        public ActionResult AddFile(IEnumerable<HttpPostedFileBase> files, int aidid)
+        {
+            string folder = "/Olg_" + aidid;
+            System.IO.Directory.CreateDirectory(Server.MapPath("~/Content" + folder));
+            if (files.ElementAt(0) == null)
+            {
+                ViewBag.Message = "Musisz dodać plik z treścią zadania";
+                return View("AddFile", db.Ogloszenie.Find(aidid));
+            }
+            int i = 0;
+            foreach (var file in files)
+            {
+
+                if (file != null && file.ContentLength > 0)
+                    try
+                    {
+                        string temp = Path.GetFileName(file.FileName);
+                        string path = Path.Combine(Server.MapPath("~/Content" + folder), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+                        ViewBag.Message = "File uploaded successfully";
+                        i++;
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "ERROR:" + ex.Message.ToString();
+                        return View("AddFile", db.Ogloszenie.Find(aidid));
+                    }
+                else
+                {
+                    ViewBag.Message = "Musisz dodać plik z treścią zadania";
+                    return View("AddFile", db.Ogloszenie.Find(aidid));
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

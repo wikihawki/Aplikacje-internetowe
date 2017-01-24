@@ -8,13 +8,7 @@
     var cena = Model.Cena;
     string miasto = Model.Miasto.Nazwa;
     string uczel = Model.Uczelnia.Nazwa;
-    string[] obrazy = new string[4]
-    {
-        "http://www.electricvelocity.com.au/Upload/Blogs/smart-e-bike-side_2.jpg",
-        "https://roweroweporady.pl/wp-content/uploads/2014/11/noski-do-pedalow.jpg",
-        "http://images.elektrobike-online.com/sixcms/media.php/6/UB_Smart_eBike_797670_1464205_7216_5412_10C1062_08_seitl.jpg",
-        "http://www.zercustoms.com/news/images/Smart/smart-ebike-5.jpg"
-    };
+    List<String> obrazy = ViewBag.images;
     ViewBag.Title = nazwa;
 }
 
@@ -79,8 +73,8 @@
 <div class="well">
     <div class="row">
         <div class="col-md-7">
-            @if (obrazy.Length > 0)
-            {<img id="myImg" src="@obrazy[0]" class="modal-link img-rounded img-responsive" onclick="showModal(this.src)">}
+            @if (obrazy.Count > 0)
+            {<img id="myImg" src="@obrazy.ElementAt(0)" class="modal-link img-rounded img-responsive" onclick="showModal(this.src)">}
 
         </div>
 
@@ -110,11 +104,11 @@
             @Html.Raw(opis);
         </div>
         <center class="panel-footer">
-            @if (obrazy.Length > 0)
+            @if (obrazy.Count > 0)
             {<h4>Galeria</h4> }
-            @for (int i = 0; i < obrazy.Length; i++)
+            @for (int i = 0; i < obrazy.Count; i++)
             {
-                <img id="myImg" src="@obrazy[i]" class="modal-link img-rounded" onclick="showModal(this.src)" style="max-width:30%; display:inline-block">
+                <img id="myImg" src="@obrazy.ElementAt(i)" class="modal-link img-rounded" onclick="showModal(this.src)" style="max-width:30%; display:inline-block">
             }
         </center>
 

@@ -337,6 +337,7 @@
     <Content Include="Views\Ogloszenies\Details.cshtml" />
     <Content Include="Views\Ogloszenies\Edit.cshtml" />
     <Content Include="Views\Ogloszenies\Index.cshtml" />
+    <Content Include="Views\Ogloszenies\AddFile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

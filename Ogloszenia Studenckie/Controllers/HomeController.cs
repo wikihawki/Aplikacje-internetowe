@@ -8,9 +8,12 @@ namespace Ogloszenia_Studenckie.Controllers
 {
     public class HomeController : Controller
     {
+        private Aplikacje_InternetoweEntities1 db = new Aplikacje_InternetoweEntities1();
         public ActionResult Index()
         {
-            return View();
+            var ogloszenie = (from a in db.Ogloszenie
+                             select a).Take(20);
+            return View(ogloszenie);
         }
 
         public ActionResult About()
