@@ -29,7 +29,7 @@ namespace Ogloszenia_Studenckie.Models
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [StringLength(50, MinimumLength = 8, ErrorMessage = "Hasło musi mieć no najmniej 8 znaków")]
         public string Haslo { get; set; }
-        [Compare("Haslo", ErrorMessage = "Confirm password dose not match.")]
+        [Compare("Haslo", ErrorMessage = "Podane hasła nie są zgodne.")]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
         [DisplayName("Potwierdź hasło")]
         public string ConfirmPassword { get; set; }

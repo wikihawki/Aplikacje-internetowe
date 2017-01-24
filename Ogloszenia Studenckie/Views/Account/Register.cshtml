@@ -63,11 +63,14 @@
             @Html.ValidationMessageFor(model => model.ConfirmPassword)
         </div>
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Zarejestruj" />
         </p>
+
     </fieldset>
 }
-
+<div class="form-group">
+    <font color="red">  @TempData["ErrorMSG"]</font>
+</div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

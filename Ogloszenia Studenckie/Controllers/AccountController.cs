@@ -172,24 +172,33 @@ namespace Ogloszenia_Studenckie.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Konto.Add(new Konto
+                if(CheckEmail(entity))
                 {
-                    Nazwa=entity.Nazwa,
-                    E_Mail = entity.E_Mail,
-                    Imie=entity.Imie,
-                    Nazwisko=entity.Nazwisko,
-                    Telefon=entity.Telefon,
-                    Haslo=entity.Haslo,
-                    Rola="2"
-        });
-                SaveChanges(db);
-                ModelState.Clear();
-                ViewBag.Message = "Rejestracja zakończona pomyślnie";
-                return RedirectToAction("Index", "Home");
+                    db.Konto.Add(new Konto
+                    {
+                        Nazwa = entity.Nazwa,
+                        E_Mail = entity.E_Mail,
+                        Imie = entity.Imie,
+                        Nazwisko = entity.Nazwisko,
+                        Telefon = entity.Telefon,
+                        Haslo = entity.Haslo,
+                        Rola = "2"
+                    });
+                    SaveChanges(db);
+                    ModelState.Clear();
+                    ViewBag.Message = "Rejestracja zakończona pomyślnie";
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Message = "Istnieje już konto o podanym adresie email.";
+                    return View();
+                }
+               
             }
 
-            TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
-            return RedirectToAction("Index", "Home");
+            TempData["ErrorMSG"] = "Podano błędne dane.!";
+            return View();
         }
 
         private void SaveChanges(Aplikacje_InternetoweEntities1 context)
@@ -217,6 +226,19 @@ namespace Ogloszenia_Studenckie.Controllers
                     sb.ToString(), ex
                 ); // Add the original exception as the innerException
             }
+        }
+
+        private bool CheckEmail( RegisterVM entity)
+        {
+
+            var isValid = (from c in db.Konto where c.E_Mail == entity.E_Mail select c).ToList();
+            if(isValid.Count() == 0)
+            {
+                return true;
+            }
+            else { return false; }
+
+            
         }
 
     }
