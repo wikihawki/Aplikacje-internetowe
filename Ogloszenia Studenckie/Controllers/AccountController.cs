@@ -185,10 +185,10 @@ namespace Ogloszenia_Studenckie.Controllers
                 SaveChanges(db);
                 ModelState.Clear();
                 ViewBag.Message = "Rejestracja zakończona pomyślnie";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            
+            TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
             return RedirectToAction("Index", "Home");
         }
 

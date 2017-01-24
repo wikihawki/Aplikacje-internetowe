@@ -15,13 +15,15 @@ namespace Ogloszenia_Studenckie.Models
         public string Nazwa { get; set; }
         [Required(ErrorMessage = "Pole E-mail jest wymagane !")]
         [RegularExpression(@"^([0-9a-zA-Z]([\+\-_\.][0-9a-zA-Z]+)*)+@(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]*\.)+[a-zA-Z0-9]{2,3})$",
-         ErrorMessage = "Please provide valid email id")]
-        [DisplayName("E-Mail")]
+         ErrorMessage = "Proszę podać adres email w poprawnej formie.")]
         public string E_Mail { get; set; }
         [Required(ErrorMessage = "Proszę podać imię", AllowEmptyStrings = false)]
         public string Imie { get; set; }
         [Required(ErrorMessage = "Proszę podać nazwisko", AllowEmptyStrings = false)]
         public string Nazwisko { get; set; }
+        [StringLength(9, MinimumLength = 9 , ErrorMessage = "To nie jest numer telefonu.")]
+        [RegularExpression(@"^[0-9]*$",
+         ErrorMessage = "Numer telefonu może zawierać tylko cyfry.")]
         public string Telefon { get; set; }
         [Required(ErrorMessage = "Proszę podać nazwę konta", AllowEmptyStrings = false)]
         [DataType(System.ComponentModel.DataAnnotations.DataType.Password)]
