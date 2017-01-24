@@ -136,7 +136,7 @@ namespace Ogloszenia_Studenckie.Controllers
                         else
                         {
                             //Login Fail
-                            TempData["ErrorMSG"] = "Access Denied! Wrong Credential";
+                            TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
                             return View(entity);
                         }
                     }
@@ -185,10 +185,10 @@ namespace Ogloszenia_Studenckie.Controllers
                 SaveChanges(db);
                 ModelState.Clear();
                 ViewBag.Message = "Rejestracja zakończona pomyślnie";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
-            
+            TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
             return RedirectToAction("Index", "Home");
         }
 
