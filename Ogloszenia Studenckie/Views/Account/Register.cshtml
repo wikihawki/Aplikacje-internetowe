@@ -3,7 +3,7 @@
 {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>User</legend>
+        <legend>Użytkownik</legend>
         @Html.AntiForgeryToken()
         @if (ViewBag.Message != null)
         {
@@ -60,9 +60,7 @@
         </p>
     </fieldset>
 }
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

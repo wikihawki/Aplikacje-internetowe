@@ -136,7 +136,7 @@ namespace Ogloszenia_Studenckie.Controllers
                         else
                         {
                             //Login Fail
-                            TempData["ErrorMSG"] = "Access Denied! Wrong Credential";
+                            TempData["ErrorMSG"] = "Odmowa dostępu! Błędne dane logowania !";
                             return View(entity);
                         }
                     }
